@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Crypto.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
