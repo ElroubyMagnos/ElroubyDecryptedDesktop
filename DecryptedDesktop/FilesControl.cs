@@ -11,18 +11,17 @@ namespace DecryptedDesktop
     {
         #region Encryption
 
-        static readonly string passPhrase = "rouby";        // can be any string
-        static readonly string saltValue = "abedalla";        // can be any string
+        static readonly string passPhrase = Main.User.Username;        // can be any string
+        static readonly string saltValue = Main.User.Password;        // can be any string
         static readonly string hashAlgorithm = "MD5";             // can be "MD5"
-        static readonly int passwordIterations = 22;                  // can be any number
+        static readonly int passwordIterations = 55;                  // can be any number
         static readonly string initVector = "~4B2z3D4e5F6x7H5"; // must be 16 bytes
-        static readonly int keySize = 256;                // can be 192 or 128
+        static readonly int keySize = 128;                // can be 192 or 128
 
-        public static string Encrypt(this string data)
+        public static string EncryptFile(this byte[] buffer)
         {
             byte[] bytes = Encoding.ASCII.GetBytes(initVector);
             byte[] rgbSalt = Encoding.ASCII.GetBytes(saltValue);
-            byte[] buffer = Encoding.UTF8.GetBytes(data);
             byte[] rgbKey = new PasswordDeriveBytes(passPhrase, rgbSalt, hashAlgorithm, passwordIterations).GetBytes(keySize / 8);
             RijndaelManaged managed = new RijndaelManaged
             {
@@ -39,11 +38,10 @@ namespace DecryptedDesktop
             return Convert.ToBase64String(inArray);
         }
 
-        public static string Decrypt(this string data)
+        public static string DecryptFile(this byte[] buffer)
         {
             byte[] bytes = Encoding.ASCII.GetBytes(initVector);
             byte[] rgbSalt = Encoding.ASCII.GetBytes(saltValue);
-            byte[] buffer = Convert.FromBase64String(data);
             byte[] rgbKey = new PasswordDeriveBytes(passPhrase, rgbSalt, hashAlgorithm, passwordIterations).GetBytes(keySize / 8);
             RijndaelManaged managed = new RijndaelManaged
             {

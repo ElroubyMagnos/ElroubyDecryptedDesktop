@@ -9,14 +9,11 @@ using System.Windows.Forms;
 
 namespace DecryptedDesktop
 {
-    public partial class Main : Form
+    public partial class AFile : UserControl
     {
-        public static User User = null;
-        public Main()
+        public AFile()
         {
             InitializeComponent();
-
-
         }
     }
 }

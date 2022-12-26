@@ -69,6 +69,7 @@ namespace DecryptedDesktop
                 {
                     Hide();
                     MainForm = new Main();
+                    Main.User = new User(Username.Text, Password.Text);
                     MainForm.ShowDialog();
                     Show();
                 }
