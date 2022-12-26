@@ -11,6 +11,7 @@ namespace DecryptedDesktop
 {
     public partial class Main : Form
     {
+
         public Main()
         {
             InitializeComponent();

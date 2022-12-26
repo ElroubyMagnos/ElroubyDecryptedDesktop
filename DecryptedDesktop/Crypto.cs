@@ -12,9 +12,23 @@ namespace Crypto
 {
     public static class Crypto
     {
+        public static string GETLine(this string Data, string Line)
+        {
+            foreach (string Linex in Data.Split('\n'))
+            {
+                if (Linex.Split('=')[0] == Line)
+                    return Linex.Split('=')[1];
+            }
+
+            return null;
+        }
         public static string EncryptFile(this FileInfo F)
         {
             return File.ReadAllText(F.FullName).Encrypt();
+        }
+        public static string DecryptFile(this FileInfo F)
+        {
+            return File.ReadAllText(F.FullName).Decrypt();
         }
         public static string ImageToString(this Image Image)
         {
@@ -32,8 +46,8 @@ namespace Crypto
         }
         #region Encryption
 
-        static readonly string passPhrase = "ElRouby";        // can be any string
-        static readonly string saltValue = "Abdullah";        // can be any string
+        static readonly string passPhrase = "rouby";        // can be any string
+        static readonly string saltValue = "abedalla";        // can be any string
         static readonly string hashAlgorithm = "MD5";             // can be "MD5"
         static readonly int passwordIterations = 22;                  // can be any number
         static readonly string initVector = "~4B2z3D4e5F6x7H5"; // must be 16 bytes

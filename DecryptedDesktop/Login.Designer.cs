@@ -46,7 +46,7 @@
             this.LoginButton.Location = new System.Drawing.Point(201, 90);
             this.LoginButton.Name = "LoginButton";
             this.LoginButton.Size = new System.Drawing.Size(75, 23);
-            this.LoginButton.TabIndex = 0;
+            this.LoginButton.TabIndex = 2;
             this.LoginButton.Text = "Login";
             this.LoginButton.UseVisualStyleBackColor = false;
             this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
@@ -64,13 +64,15 @@
             this.Password.ShowButtonLeft = false;
             this.Password.Size = new System.Drawing.Size(197, 22);
             this.Password.TabIndex = 1;
+            this.Password.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Password_KeyDown);
             // 
             // Username
             // 
             this.Username.Location = new System.Drawing.Point(79, 12);
             this.Username.Name = "Username";
             this.Username.Size = new System.Drawing.Size(197, 20);
-            this.Username.TabIndex = 2;
+            this.Username.TabIndex = 0;
+            this.Username.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Password_KeyDown);
             // 
             // label1
             // 
@@ -99,25 +101,28 @@
             this.Register.Location = new System.Drawing.Point(17, 90);
             this.Register.Name = "Register";
             this.Register.Size = new System.Drawing.Size(75, 23);
-            this.Register.TabIndex = 5;
+            this.Register.TabIndex = 3;
             this.Register.Text = "Register";
             this.Register.UseVisualStyleBackColor = false;
+            this.Register.Click += new System.EventHandler(this.Register_Click);
             // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(288, 126);
+            this.ClientSize = new System.Drawing.Size(299, 126);
             this.Controls.Add(this.Register);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Username);
             this.Controls.Add(this.Password);
             this.Controls.Add(this.LoginButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Elrouby: Decrypted Desktop";
+            this.Text = "Elrouby DD: Login";
             this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
