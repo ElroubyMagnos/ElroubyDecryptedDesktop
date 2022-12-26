@@ -30,10 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.LoginButton = new ElroubyLibrary.Buttons.FlatButton();
-            this.passwordBox1 = new ElroubyLibrary.TextBoxes.PasswordBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Password = new ElroubyLibrary.TextBoxes.PasswordBox();
+            this.Username = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.Register = new ElroubyLibrary.Buttons.FlatButton();
             this.SuspendLayout();
             // 
             // LoginButton
@@ -48,27 +49,28 @@
             this.LoginButton.TabIndex = 0;
             this.LoginButton.Text = "Login";
             this.LoginButton.UseVisualStyleBackColor = false;
+            this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
-            // passwordBox1
+            // Password
             // 
-            this.passwordBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.passwordBox1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordBox1.Location = new System.Drawing.Point(79, 47);
-            this.passwordBox1.MaxLength = 1000;
-            this.passwordBox1.Name = "passwordBox1";
-            this.passwordBox1.NumericOnly = false;
-            this.passwordBox1.PasswordChar = '✦';
-            this.passwordBox1.ShortcutsEnabled = false;
-            this.passwordBox1.ShowButtonLeft = false;
-            this.passwordBox1.Size = new System.Drawing.Size(197, 22);
-            this.passwordBox1.TabIndex = 1;
+            this.Password.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Password.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Password.Location = new System.Drawing.Point(79, 47);
+            this.Password.MaxLength = 1000;
+            this.Password.Name = "Password";
+            this.Password.NumericOnly = false;
+            this.Password.PasswordChar = '✦';
+            this.Password.ShortcutsEnabled = false;
+            this.Password.ShowButtonLeft = false;
+            this.Password.Size = new System.Drawing.Size(197, 22);
+            this.Password.TabIndex = 1;
             // 
-            // textBox1
+            // Username
             // 
-            this.textBox1.Location = new System.Drawing.Point(79, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(197, 20);
-            this.textBox1.TabIndex = 2;
+            this.Username.Location = new System.Drawing.Point(79, 12);
+            this.Username.Name = "Username";
+            this.Username.Size = new System.Drawing.Size(197, 20);
+            this.Username.TabIndex = 2;
             // 
             // label1
             // 
@@ -88,15 +90,29 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Password:";
             // 
+            // Register
+            // 
+            this.Register.BackColor = System.Drawing.SystemColors.Highlight;
+            this.Register.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Register.FlatAppearance.BorderSize = 0;
+            this.Register.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Register.Location = new System.Drawing.Point(17, 90);
+            this.Register.Name = "Register";
+            this.Register.Size = new System.Drawing.Size(75, 23);
+            this.Register.TabIndex = 5;
+            this.Register.Text = "Register";
+            this.Register.UseVisualStyleBackColor = false;
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(288, 126);
+            this.Controls.Add(this.Register);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.passwordBox1);
+            this.Controls.Add(this.Username);
+            this.Controls.Add(this.Password);
             this.Controls.Add(this.LoginButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Login";
@@ -111,9 +127,10 @@
         #endregion
 
         private ElroubyLibrary.Buttons.FlatButton LoginButton;
-        private ElroubyLibrary.TextBoxes.PasswordBox passwordBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private ElroubyLibrary.TextBoxes.PasswordBox Password;
+        private System.Windows.Forms.TextBox Username;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private ElroubyLibrary.Buttons.FlatButton Register;
     }
 }

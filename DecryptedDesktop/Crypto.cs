@@ -1,4 +1,4 @@
-﻿using System;
+﻿               using System;
 using System.Linq;
 using System.Text;
 using System.Drawing;
@@ -12,6 +12,10 @@ namespace Crypto
 {
     public static class Crypto
     {
+        public static string EncryptFile(this FileInfo F)
+        {
+            return File.ReadAllText(F.FullName).Encrypt();
+        }
         public static string ImageToString(this Image Image)
         {
             return Convert.ToBase64String(Image.ToByteArray());
