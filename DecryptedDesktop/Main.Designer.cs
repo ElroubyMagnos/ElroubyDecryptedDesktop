@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
+            this.Back = new System.Windows.Forms.ToolStripMenuItem();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Import = new System.Windows.Forms.ToolStripMenuItem();
             this.Import_File = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,12 +58,15 @@
             this.DeSpace = new System.Windows.Forms.FlowLayoutPanel();
             this.OP = new System.Windows.Forms.OpenFileDialog();
             this.FD = new System.Windows.Forms.FolderBrowserDialog();
+            this.CurrentDIR = new System.Windows.Forms.TextBox();
+            this.FileLoad = new System.Windows.Forms.Timer(this.components);
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // MenuStrip
             // 
             this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Back,
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.userToolStripMenuItem,
@@ -69,7 +74,14 @@
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
             this.MenuStrip.Size = new System.Drawing.Size(800, 24);
-            this.MenuStrip.TabIndex = 0;
+            this.MenuStrip.TabIndex = 2;
+            // 
+            // Back
+            // 
+            this.Back.Image = global::DecryptedDesktop.Properties.Resources.back;
+            this.Back.Name = "Back";
+            this.Back.Size = new System.Drawing.Size(28, 20);
+            this.Back.Click += new System.EventHandler(this.Back_Click);
             // 
             // fileToolStripMenuItem
             // 
@@ -86,14 +98,14 @@
             this.Import_File,
             this.Import_Folder});
             this.Import.Name = "Import";
-            this.Import.Size = new System.Drawing.Size(180, 22);
+            this.Import.Size = new System.Drawing.Size(110, 22);
             this.Import.Text = "Import";
             // 
             // Import_File
             // 
             this.Import_File.Image = global::DecryptedDesktop.Properties.Resources.File;
             this.Import_File.Name = "Import_File";
-            this.Import_File.Size = new System.Drawing.Size(180, 22);
+            this.Import_File.Size = new System.Drawing.Size(107, 22);
             this.Import_File.Text = "File";
             this.Import_File.Click += new System.EventHandler(this.Import_File_Click);
             // 
@@ -101,13 +113,13 @@
             // 
             this.Import_Folder.Image = global::DecryptedDesktop.Properties.Resources.Folder;
             this.Import_Folder.Name = "Import_Folder";
-            this.Import_Folder.Size = new System.Drawing.Size(180, 22);
+            this.Import_Folder.Size = new System.Drawing.Size(107, 22);
             this.Import_Folder.Text = "Folder";
             // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.exportToolStripMenuItem.Text = "Export";
             // 
             // editToolStripMenuItem
@@ -238,21 +250,38 @@
             // DeSpace
             // 
             this.DeSpace.AutoScroll = true;
-            this.DeSpace.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DeSpace.Location = new System.Drawing.Point(0, 24);
+            this.DeSpace.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.DeSpace.Location = new System.Drawing.Point(0, 50);
             this.DeSpace.Name = "DeSpace";
-            this.DeSpace.Size = new System.Drawing.Size(800, 426);
+            this.DeSpace.Size = new System.Drawing.Size(800, 400);
             this.DeSpace.TabIndex = 1;
             // 
             // OP
             // 
             this.OP.FileName = "openFileDialog1";
             // 
+            // CurrentDIR
+            // 
+            this.CurrentDIR.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.CurrentDIR.Dock = System.Windows.Forms.DockStyle.Top;
+            this.CurrentDIR.Location = new System.Drawing.Point(0, 24);
+            this.CurrentDIR.Name = "CurrentDIR";
+            this.CurrentDIR.ReadOnly = true;
+            this.CurrentDIR.Size = new System.Drawing.Size(800, 20);
+            this.CurrentDIR.TabIndex = 0;
+            this.CurrentDIR.TextChanged += new System.EventHandler(this.CurrentDIR_TextChanged);
+            // 
+            // FileLoad
+            // 
+            this.FileLoad.Enabled = true;
+            this.FileLoad.Interval = 500;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.CurrentDIR);
             this.Controls.Add(this.DeSpace);
             this.Controls.Add(this.MenuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -260,6 +289,7 @@
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Elrouby: Decrypted Desktop";
+            this.Load += new System.EventHandler(this.Main_Load);
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -296,6 +326,9 @@
         private System.Windows.Forms.ToolStripMenuItem Import_Folder;
         private System.Windows.Forms.OpenFileDialog OP;
         private System.Windows.Forms.FolderBrowserDialog FD;
+        private System.Windows.Forms.Timer FileLoad;
+        public System.Windows.Forms.TextBox CurrentDIR;
+        private System.Windows.Forms.ToolStripMenuItem Back;
     }
 }
 

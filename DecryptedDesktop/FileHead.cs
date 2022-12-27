@@ -9,8 +9,22 @@ namespace DecryptedDesktop
 {
     public class FileHead : UserControl
     {
+        public string Owner = null;
+        public string Path = "";
         public FileHead() 
         {
+
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // FileHead
+            // 
+            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Name = "FileHead";
+            this.ResumeLayout(false);
 
         }
     }

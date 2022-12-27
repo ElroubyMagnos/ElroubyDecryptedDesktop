@@ -27,13 +27,9 @@ namespace DecryptedDesktop
         {
 
         }
-        Main MainForm = null;
+        public static Main MainForm = null;
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            if (!Directory.Exists(Application.StartupPath + "\\Users"))
-            {
-                Directory.CreateDirectory(Application.StartupPath + "\\Users");
-            }
             DirectoryInfo DI = new DirectoryInfo(Application.StartupPath + "\\Users");
             FileInfo[] FI = DI.GetFiles();
 
@@ -50,8 +46,6 @@ namespace DecryptedDesktop
 
             if (Found)
             {
-                Hide();
-
                 string Data = File.ReadAllText(Application.StartupPath + $"\\Users\\{Username.Text}.usr").Decrypt();
 
                 string UN = Data.GETLine("UN");

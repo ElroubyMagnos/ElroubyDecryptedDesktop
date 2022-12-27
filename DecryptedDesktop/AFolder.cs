@@ -11,8 +11,6 @@ namespace DecryptedDesktop
 {
     public partial class AFolder : FileHead
     {
-        public string Owner = null;
-        public string Path = "";
         public AFolder(string Name, string path, string owner)
         {
             InitializeComponent();
@@ -20,6 +18,16 @@ namespace DecryptedDesktop
             TheName.Text = Name;
             Path = path;
             Owner = owner;
+        }
+
+        private void All_Click(object sender, EventArgs e)
+        {
+            Main.CurrentSelected = this;
+        }
+
+        private void AFolder_DoubleClick(object sender, EventArgs e)
+        {
+            Login.MainForm.CurrentDIR.Text += TheName.Text + "\\";
         }
     }
 }

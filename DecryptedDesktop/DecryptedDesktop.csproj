@@ -94,6 +94,9 @@
     <EmbeddedResource Include="AFolder.resx">
       <DependentUpon>AFolder.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FileHead.resx">
+      <DependentUpon>FileHead.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -125,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="cycle.ico" />
+    <None Include="Resources\back.png" />
     <None Include="Resources\Selected.png" />
     <None Include="Resources\file.png" />
     <None Include="Resources\Folder.png" />

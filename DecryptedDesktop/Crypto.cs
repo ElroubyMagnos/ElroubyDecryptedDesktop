@@ -13,6 +13,13 @@ namespace Crypto
 {
     public static class Crypto
     {
+        public static Image FromBytesToImage(this byte[] AllBytes)
+        {
+            using (var ms = new MemoryStream(AllBytes))
+            {
+                return Image.FromStream(ms);
+            }
+        }
         public static string ByteToString(this byte[] AllBytes)
         {
             return Encoding.UTF8.GetString(AllBytes);

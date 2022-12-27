@@ -8,13 +8,24 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using Crypto;
+using System.Threading;
 
 namespace DecryptedDesktop
 {
     public partial class Main : Form
     {
-        public static User User = null;
-        public static AFile CurrentSelected { get; set; }
+        public static User User { get; set; }
+        static FileHead _CS;
+        public static FileHead CurrentSelected 
+        {
+            get => _CS;
+            set 
+            {
+                if (_CS != null) _CS.BackgroundImage = null;
+                _CS = value;
+                _CS.BackgroundImage = Properties.Resources.Selected;
+            }
+        }
         public Main()
         {
             InitializeComponent();
@@ -36,6 +47,53 @@ namespace DecryptedDesktop
                 } 
                 else File.WriteAllText(Application.StartupPath + "\\Desktop\\" + OP.FileName.Split('\\').Last() + ".roby", File.ReadAllBytes(OP.FileName).EncFile());
             }
+
+            CurrentDIR_TextChanged(sender, e);
+        }
+
+        private void Back_Click(object sender, EventArgs e)
+        {
+            TextBox CD = Login.MainForm.CurrentDIR;
+            string[] CDText = CD.Text.Split('\\');
+            if (!CD.Text.Contains("\\")) 
+                CD.Text = "";
+            else if (CDText.Last().Length == 0)
+            {
+                CD.Text = CD.Text.Replace(CDText[CDText.Count() - 2] + "\\", "");
+            }
+        }
+
+        private void CurrentDIR_TextChanged(object sender, EventArgs e)
+        {
+            DirectoryInfo DI = new DirectoryInfo(Application.StartupPath + "\\Desktop\\" + CurrentDIR.Text);
+            FileInfo[] AllFiles = DI.GetFiles();
+            DirectoryInfo[] AllFolders = DI.GetDirectories();
+
+            List<FileInfo> AllrobyFiles = new List<FileInfo>();
+
+            foreach (FileInfo Filei in AllFiles)
+            {
+                if (Path.GetExtension(Filei.Name) == ".roby")
+                    AllrobyFiles.Add(Filei);
+            }
+
+            DeSpace.Controls.Clear();
+
+            foreach (DirectoryInfo Dinfo in AllFolders)
+            {
+                DeSpace.Controls.Add(new AFolder(Dinfo.Name, Dinfo.FullName, User.Username));
+            }
+
+            foreach (FileInfo Finfo in AllrobyFiles)
+            {
+                if (Path.GetExtension(Finfo.Name) == ".roby")
+                    DeSpace.Controls.Add(new AFile(Finfo.Name, Finfo.FullName, User.Username));
+            }
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+            CurrentDIR_TextChanged(sender, e);
         }
     }
 }

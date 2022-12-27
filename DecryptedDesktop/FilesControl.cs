@@ -10,6 +10,12 @@ namespace DecryptedDesktop
 {
     public static class FilesControl
     {
+        public static string ReadOwner(this string Path)
+        {
+            string TheString = File.ReadAllText(Path).Decrypt();
+
+            return TheString.Substring(TheString.IndexOf("UN=") + "UN=".Length).Split('\n').First();
+        }
         public static string EncFile(this byte[] TheFile)
         {
             return ($"UN={Main.User.Username}\nData=" + TheFile.ByteToString().Encrypt()).Encrypt();

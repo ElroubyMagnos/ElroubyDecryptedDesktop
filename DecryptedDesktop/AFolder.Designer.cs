@@ -29,39 +29,47 @@
         private void InitializeComponent()
         {
             this.TheName = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.Pic = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic)).BeginInit();
             this.SuspendLayout();
             // 
             // TheName
             // 
             this.TheName.AutoSize = true;
-            this.TheName.Location = new System.Drawing.Point(31, 84);
+            this.TheName.Location = new System.Drawing.Point(3, 81);
             this.TheName.Name = "TheName";
             this.TheName.Size = new System.Drawing.Size(35, 13);
             this.TheName.TabIndex = 3;
             this.TheName.Text = "Name";
+            this.TheName.Click += new System.EventHandler(this.All_Click);
+            this.TheName.DoubleClick += new System.EventHandler(this.AFolder_DoubleClick);
             // 
-            // pictureBox1
+            // Pic
             // 
-            this.pictureBox1.BackgroundImage = global::DecryptedDesktop.Properties.Resources.Folder;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 78);
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
+            this.Pic.BackgroundImage = global::DecryptedDesktop.Properties.Resources.Folder;
+            this.Pic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Pic.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Pic.Location = new System.Drawing.Point(0, 0);
+            this.Pic.Name = "Pic";
+            this.Pic.Size = new System.Drawing.Size(100, 78);
+            this.Pic.TabIndex = 2;
+            this.Pic.TabStop = false;
+            this.Pic.Click += new System.EventHandler(this.All_Click);
+            this.Pic.DoubleClick += new System.EventHandler(this.AFolder_DoubleClick);
             // 
             // AFolder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.TheName);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.Pic);
             this.Name = "AFolder";
             this.Size = new System.Drawing.Size(100, 100);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Click += new System.EventHandler(this.All_Click);
+            this.DoubleClick += new System.EventHandler(this.AFolder_DoubleClick);
+            ((System.ComponentModel.ISupportInitialize)(this.Pic)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -70,6 +78,6 @@
         #endregion
 
         private System.Windows.Forms.Label TheName;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox Pic;
     }
 }
