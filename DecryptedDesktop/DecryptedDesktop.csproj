@@ -50,7 +50,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AFile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AFile.Designer.cs">
+      <DependentUpon>AFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AFolder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AFolder.Designer.cs">
+      <DependentUpon>AFolder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Crypto.cs" />
+    <Compile Include="FileHead.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="FilesControl.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -73,6 +88,12 @@
       <DependentUpon>RegisterWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
+    <EmbeddedResource Include="AFile.resx">
+      <DependentUpon>AFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AFolder.resx">
+      <DependentUpon>AFolder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -87,6 +108,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="RegisterWindow.resx">
       <DependentUpon>RegisterWindow.cs</DependentUpon>
@@ -103,6 +125,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="cycle.ico" />
+    <None Include="Resources\Selected.png" />
+    <None Include="Resources\file.png" />
+    <None Include="Resources\Folder.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

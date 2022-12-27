@@ -31,15 +31,17 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Import = new System.Windows.Forms.ToolStripMenuItem();
+            this.Import_File = new System.Windows.Forms.ToolStripMenuItem();
+            this.Import_Folder = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,6 +54,8 @@
             this.tiktokToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.instagramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeSpace = new System.Windows.Forms.FlowLayoutPanel();
+            this.OP = new System.Windows.Forms.OpenFileDialog();
+            this.FD = new System.Windows.Forms.FolderBrowserDialog();
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,22 +74,40 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.importToolStripMenuItem,
+            this.Import,
             this.exportToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // importToolStripMenuItem
+            // Import
             // 
-            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
-            this.importToolStripMenuItem.Text = "Import";
+            this.Import.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Import_File,
+            this.Import_Folder});
+            this.Import.Name = "Import";
+            this.Import.Size = new System.Drawing.Size(180, 22);
+            this.Import.Text = "Import";
+            // 
+            // Import_File
+            // 
+            this.Import_File.Image = global::DecryptedDesktop.Properties.Resources.File;
+            this.Import_File.Name = "Import_File";
+            this.Import_File.Size = new System.Drawing.Size(180, 22);
+            this.Import_File.Text = "File";
+            this.Import_File.Click += new System.EventHandler(this.Import_File_Click);
+            // 
+            // Import_Folder
+            // 
+            this.Import_Folder.Image = global::DecryptedDesktop.Properties.Resources.Folder;
+            this.Import_Folder.Name = "Import_Folder";
+            this.Import_Folder.Size = new System.Drawing.Size(180, 22);
+            this.Import_Folder.Text = "Folder";
             // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportToolStripMenuItem.Text = "Export";
             // 
             // editToolStripMenuItem
@@ -104,37 +126,37 @@
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
-            // 
-            // selectAllToolStripMenuItem
-            // 
-            this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.selectAllToolStripMenuItem.Text = "Select All";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(119, 6);
+            // 
+            // selectAllToolStripMenuItem
+            // 
+            this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.selectAllToolStripMenuItem.Text = "Select All";
             // 
             // userToolStripMenuItem
             // 
@@ -148,13 +170,13 @@
             // logOutToolStripMenuItem
             // 
             this.logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
-            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.logOutToolStripMenuItem.Text = "Log out";
             // 
             // deleteUserToolStripMenuItem
             // 
             this.deleteUserToolStripMenuItem.Name = "deleteUserToolStripMenuItem";
-            this.deleteUserToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteUserToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.deleteUserToolStripMenuItem.Text = "Delete User";
             // 
             // programToolStripMenuItem
@@ -174,43 +196,43 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // youtubeToolStripMenuItem
             // 
             this.youtubeToolStripMenuItem.Name = "youtubeToolStripMenuItem";
-            this.youtubeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.youtubeToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.youtubeToolStripMenuItem.Text = "Youtube";
             // 
             // linkedInToolStripMenuItem
             // 
             this.linkedInToolStripMenuItem.Name = "linkedInToolStripMenuItem";
-            this.linkedInToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.linkedInToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.linkedInToolStripMenuItem.Text = "LinkedIn";
             // 
             // facebookPageToolStripMenuItem
             // 
             this.facebookPageToolStripMenuItem.Name = "facebookPageToolStripMenuItem";
-            this.facebookPageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.facebookPageToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.facebookPageToolStripMenuItem.Text = "Facebook Page";
             // 
             // facebookAccountToolStripMenuItem
             // 
             this.facebookAccountToolStripMenuItem.Name = "facebookAccountToolStripMenuItem";
-            this.facebookAccountToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.facebookAccountToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.facebookAccountToolStripMenuItem.Text = "Facebook Account";
             // 
             // tiktokToolStripMenuItem
             // 
             this.tiktokToolStripMenuItem.Name = "tiktokToolStripMenuItem";
-            this.tiktokToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tiktokToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.tiktokToolStripMenuItem.Text = "Tiktok";
             // 
             // instagramToolStripMenuItem
             // 
             this.instagramToolStripMenuItem.Name = "instagramToolStripMenuItem";
-            this.instagramToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.instagramToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.instagramToolStripMenuItem.Text = "Instagram";
             // 
             // DeSpace
@@ -221,6 +243,10 @@
             this.DeSpace.Name = "DeSpace";
             this.DeSpace.Size = new System.Drawing.Size(800, 426);
             this.DeSpace.TabIndex = 1;
+            // 
+            // OP
+            // 
+            this.OP.FileName = "openFileDialog1";
             // 
             // Main
             // 
@@ -245,7 +271,7 @@
 
         private System.Windows.Forms.MenuStrip MenuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem Import;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
@@ -266,6 +292,10 @@
         private System.Windows.Forms.ToolStripMenuItem tiktokToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem instagramToolStripMenuItem;
         private System.Windows.Forms.FlowLayoutPanel DeSpace;
+        private System.Windows.Forms.ToolStripMenuItem Import_File;
+        private System.Windows.Forms.ToolStripMenuItem Import_Folder;
+        private System.Windows.Forms.OpenFileDialog OP;
+        private System.Windows.Forms.FolderBrowserDialog FD;
     }
 }
 

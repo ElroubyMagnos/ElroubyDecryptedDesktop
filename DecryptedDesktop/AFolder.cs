@@ -9,11 +9,17 @@ using System.Windows.Forms;
 
 namespace DecryptedDesktop
 {
-    public partial class AFolder : UserControl
+    public partial class AFolder : FileHead
     {
-        public AFolder()
+        public string Owner = null;
+        public string Path = "";
+        public AFolder(string Name, string path, string owner)
         {
             InitializeComponent();
+
+            TheName.Text = Name;
+            Path = path;
+            Owner = owner;
         }
     }
 }

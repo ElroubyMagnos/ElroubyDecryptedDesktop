@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Crypto;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,19 @@ namespace DecryptedDesktop
 {
     public static class FilesControl
     {
+        public static string EncFile(this byte[] TheFile)
+        {
+            return ($"UN={Main.User.Username}\nData=" + TheFile.ByteToString().Encrypt()).Encrypt();
+        }
+
+        public static byte[] DecFile(this string Data)
+        {
+            string FirstDec = Data.Decrypt();
+            string SecondDec = FirstDec.Substring(FirstDec.IndexOf("Data=") + "Data=".Length);
+            byte[] ThirdDec = SecondDec.Decrypt().StringToByte();
+
+            return ThirdDec;
+        }
         #region Encryption
 
         static readonly string passPhrase = Main.User.Username;        // can be any string
@@ -18,7 +32,7 @@ namespace DecryptedDesktop
         static readonly string initVector = "~4B2z3D4e5F6x7H5"; // must be 16 bytes
         static readonly int keySize = 128;                // can be 192 or 128
 
-        public static string EncryptFile(this byte[] buffer)
+        public static byte[] EncryptFile(this byte[] buffer)
         {
             byte[] bytes = Encoding.ASCII.GetBytes(initVector);
             byte[] rgbSalt = Encoding.ASCII.GetBytes(saltValue);
@@ -35,10 +49,10 @@ namespace DecryptedDesktop
             byte[] inArray = stream.ToArray();
             stream.Close();
             stream2.Close();
-            return Convert.ToBase64String(inArray);
+            return inArray;
         }
 
-        public static string DecryptFile(this byte[] buffer)
+        public static byte[] DecryptFile(this byte[] buffer)
         {
             byte[] bytes = Encoding.ASCII.GetBytes(initVector);
             byte[] rgbSalt = Encoding.ASCII.GetBytes(saltValue);
@@ -54,7 +68,7 @@ namespace DecryptedDesktop
             int count = stream2.Read(buffer5, 0, buffer5.Length);
             stream.Close();
             stream2.Close();
-            return Encoding.UTF8.GetString(buffer5, 0, count);
+            return buffer5;
         }
         #endregion
     }

@@ -7,11 +7,20 @@ using System.Drawing.Imaging;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Crypto
 {
     public static class Crypto
     {
+        public static string ByteToString(this byte[] AllBytes)
+        {
+            return Encoding.UTF8.GetString(AllBytes);
+        }
+        public static byte[] StringToByte(this string Text)
+        {
+            return Encoding.UTF8.GetBytes(Text);
+        }
         public static string GETLine(this string Data, string Line)
         {
             foreach (string Linex in Data.Split('\n'))
