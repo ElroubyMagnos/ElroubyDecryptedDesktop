@@ -32,11 +32,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.Back = new System.Windows.Forms.ToolStripMenuItem();
+            this.RefreshFiles = new System.Windows.Forms.ToolStripMenuItem();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Import = new System.Windows.Forms.ToolStripMenuItem();
             this.Import_File = new System.Windows.Forms.ToolStripMenuItem();
             this.Import_Folder = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Export = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,6 +68,7 @@
             // 
             this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Back,
+            this.RefreshFiles,
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.userToolStripMenuItem,
@@ -83,11 +85,18 @@
             this.Back.Size = new System.Drawing.Size(28, 20);
             this.Back.Click += new System.EventHandler(this.Back_Click);
             // 
+            // RefreshFiles
+            // 
+            this.RefreshFiles.Image = global::DecryptedDesktop.Properties.Resources.refresh;
+            this.RefreshFiles.Name = "RefreshFiles";
+            this.RefreshFiles.Size = new System.Drawing.Size(28, 20);
+            this.RefreshFiles.Click += new System.EventHandler(this.RefreshFiles_Click);
+            // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Import,
-            this.exportToolStripMenuItem});
+            this.Export});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -98,14 +107,15 @@
             this.Import_File,
             this.Import_Folder});
             this.Import.Name = "Import";
-            this.Import.Size = new System.Drawing.Size(110, 22);
+            this.Import.Size = new System.Drawing.Size(180, 22);
             this.Import.Text = "Import";
+            this.Import.Click += new System.EventHandler(this.Import_Click);
             // 
             // Import_File
             // 
             this.Import_File.Image = global::DecryptedDesktop.Properties.Resources.File;
             this.Import_File.Name = "Import_File";
-            this.Import_File.Size = new System.Drawing.Size(107, 22);
+            this.Import_File.Size = new System.Drawing.Size(180, 22);
             this.Import_File.Text = "File";
             this.Import_File.Click += new System.EventHandler(this.Import_File_Click);
             // 
@@ -113,14 +123,14 @@
             // 
             this.Import_Folder.Image = global::DecryptedDesktop.Properties.Resources.Folder;
             this.Import_Folder.Name = "Import_Folder";
-            this.Import_Folder.Size = new System.Drawing.Size(107, 22);
+            this.Import_Folder.Size = new System.Drawing.Size(180, 22);
             this.Import_Folder.Text = "Folder";
             // 
-            // exportToolStripMenuItem
+            // Export
             // 
-            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
-            this.exportToolStripMenuItem.Text = "Export";
+            this.Export.Name = "Export";
+            this.Export.Size = new System.Drawing.Size(180, 22);
+            this.Export.Text = "Export";
             // 
             // editToolStripMenuItem
             // 
@@ -302,7 +312,7 @@
         private System.Windows.Forms.MenuStrip MenuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem Import;
-        private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem Export;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
@@ -329,6 +339,7 @@
         private System.Windows.Forms.Timer FileLoad;
         public System.Windows.Forms.TextBox CurrentDIR;
         private System.Windows.Forms.ToolStripMenuItem Back;
+        private System.Windows.Forms.ToolStripMenuItem RefreshFiles;
     }
 }
 

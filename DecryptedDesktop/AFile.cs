@@ -35,7 +35,7 @@ namespace DecryptedDesktop
                 Exporter.FileName = TheName.Text.Split('.')[0] + "." + TheName.Text.Split('.')[1];
                 if (Exporter.ShowDialog() == DialogResult.OK)
                 {
-                    File.ReadAllText(Path).DecFile().FromBytesToImage().Save(Exporter.FileName);
+                    File.ReadAllText(Path).DecryptImage().Save(Exporter.FileName);
                 }
             }
             else

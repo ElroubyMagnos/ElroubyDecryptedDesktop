@@ -16,16 +16,7 @@ namespace DecryptedDesktop
     {
         public static User User { get; set; }
         static FileHead _CS;
-        public static FileHead CurrentSelected 
-        {
-            get => _CS;
-            set 
-            {
-                if (_CS != null) _CS.BackgroundImage = null;
-                _CS = value;
-                _CS.BackgroundImage = Properties.Resources.Selected;
-            }
-        }
+        public static ListVoid<FileHead> CurrentSelected = new ListVoid<FileHead>();
         public Main()
         {
             InitializeComponent();
@@ -38,14 +29,12 @@ namespace DecryptedDesktop
                 string Extension = Path.GetExtension(OP.FileName).Replace(".", "");
                 if (Extension == "jpg" || Extension == "png" || Extension == "bmp" || Extension == "gif" || Extension == "tga" || Extension == "pic" || Extension == "tiff")
                 {
-                    Image I = Image.FromFile(OP.FileName);
-                    string TheImage = I.ImageToString().StringToByte().EncFile();
-                    File.WriteAllText(Application.StartupPath + "\\Desktop\\" + OP.FileName.Split('\\').Last() + ".roby", TheImage);
+                    File.WriteAllText(Application.StartupPath + $"\\Desktop\\{User.Username}\\" + OP.FileName.Split('\\').Last() + ".roby", Image.FromFile(OP.FileName).EncryptImage());
 
-                    AFile F = new AFile(OP.FileName.Split('\\').Last(), Application.StartupPath + "\\Desktop\\" + OP.FileName.Split('\\').Last(), User.Username);
+                    AFile F = new AFile(OP.FileName.Split('\\').Last(), Application.StartupPath + $"\\Desktop\\{User.Username}\\" + OP.FileName.Split('\\').Last(), User.Username);
                     DeSpace.Controls.Add(F);
                 } 
-                else File.WriteAllText(Application.StartupPath + "\\Desktop\\" + OP.FileName.Split('\\').Last() + ".roby", File.ReadAllBytes(OP.FileName).EncFile());
+                else File.WriteAllText(Application.StartupPath + $"\\Desktop\\{User.Username}\\" + OP.FileName.Split('\\').Last() + ".roby", File.ReadAllBytes(OP.FileName).EncFile());
             }
 
             CurrentDIR_TextChanged(sender, e);
@@ -65,7 +54,7 @@ namespace DecryptedDesktop
 
         private void CurrentDIR_TextChanged(object sender, EventArgs e)
         {
-            DirectoryInfo DI = new DirectoryInfo(Application.StartupPath + "\\Desktop\\" + CurrentDIR.Text);
+            DirectoryInfo DI = new DirectoryInfo(Application.StartupPath + $"\\Desktop\\{User.Username}\\" + CurrentDIR.Text);
             FileInfo[] AllFiles = DI.GetFiles();
             DirectoryInfo[] AllFolders = DI.GetDirectories();
 
@@ -87,13 +76,59 @@ namespace DecryptedDesktop
             foreach (FileInfo Finfo in AllrobyFiles)
             {
                 if (Path.GetExtension(Finfo.Name) == ".roby")
-                    DeSpace.Controls.Add(new AFile(Finfo.Name, Finfo.FullName, User.Username));
+                {
+                    if (Finfo.Name.Split('.')[1].IsImage())
+                    {
+                        if (Finfo.FullName.ReadImageOwner() == User.Username && Finfo.FullName.ReadImageOwnerPassword() == User.Password)
+                        {
+                            AFile TheFile = new AFile(Finfo.Name, Finfo.FullName, User.Username);
+                            DeSpace.Controls.Add(TheFile);
+                            TheFile.Pic.BackgroundImage = File.ReadAllText(Finfo.FullName).DecryptImage();
+                        }
+                    }
+                    else if (Finfo.FullName.ReadOwner() == User.Username && Finfo.FullName.ReadOwnerPassword() == User.Password)
+                    {
+                        DeSpace.Controls.Add(new AFile(Finfo.Name, Finfo.FullName, User.Username));
+                    }
+                }
             }
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
+            if (!Directory.Exists(Application.StartupPath + $"\\Desktop\\{User.Username}"))
+                Directory.CreateDirectory(Application.StartupPath + $"\\Desktop\\{User.Username}");
             CurrentDIR_TextChanged(sender, e);
+        }
+
+        private void RefreshFiles_Click(object sender, EventArgs e)
+        {
+            CurrentDIR_TextChanged(sender, e);
+        }
+
+        private void Import_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+
+    public class ListVoid<FileHead> : List<FileHead>
+    {
+        public ListVoid() : base()
+        {
+
+        }
+
+        public new void Add(FileHead FH)
+        {
+            base.Add(FH);
+            FH.Pic.Image = Properties.Resources.Selected;
+        }
+
+        public new void Remove(FileHead FH)
+        {
+            base.Remove(FH);
+            FH.Pic.Image = null;
         }
     }
 }

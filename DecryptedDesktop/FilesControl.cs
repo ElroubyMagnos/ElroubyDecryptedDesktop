@@ -1,6 +1,7 @@
 ﻿using Crypto;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -10,15 +11,48 @@ namespace DecryptedDesktop
 {
     public static class FilesControl
     {
+        public static bool IsImage(this string Extension)
+        {
+            return Extension == "jpg" || Extension == "png" || Extension == "bmp"
+                || Extension == "gif" || Extension == "tga" || Extension == "pic"
+                || Extension == "tiff";
+        }
+        public static string ReadImageOwner(this string Path)
+        {
+            string Data = File.ReadAllText(Path).Decrypt();
+            return Data.Substring(Data.IndexOf("UN=") + "UN=".Length).Split('\n').First();
+        }
+        public static string ReadImageOwnerPassword(this string Path)
+        {
+            string Data = File.ReadAllText(Path).Decrypt();
+            return Data.Substring(Data.IndexOf("PSS=") + "PSS=".Length).Split('\n').First();
+        }
+        public static string EncryptImage(this Image I)
+        {
+            return ($"UN={Main.User.Username}\nPSS={Main.User.Password}\nData=" + I.ImageToString()).Encrypt();
+        }
+        public static Image DecryptImage(this string Data)
+        {
+            string FirstDec = Data.Decrypt();
+            string SecondDec = FirstDec.Substring(FirstDec.IndexOf("Data=") + "Data=".Length);
+
+            return SecondDec.ToImage();
+        }
         public static string ReadOwner(this string Path)
         {
             string TheString = File.ReadAllText(Path).Decrypt();
 
             return TheString.Substring(TheString.IndexOf("UN=") + "UN=".Length).Split('\n').First();
         }
+        public static string ReadOwnerPassword(this string Path)
+        {
+            string TheString = File.ReadAllText(Path).Decrypt();
+
+            return TheString.Substring(TheString.IndexOf("PSS=") + "PSS=".Length).Split('\n').First();
+        }
         public static string EncFile(this byte[] TheFile)
         {
-            return ($"UN={Main.User.Username}\nData=" + TheFile.ByteToString().Encrypt()).Encrypt();
+            return ($"UN={Main.User.Username}\nPSS={Main.User.Password}\nData=" + TheFile.ByteToString().Encrypt()).Encrypt();
         }
 
         public static byte[] DecFile(this string Data)

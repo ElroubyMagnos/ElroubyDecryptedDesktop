@@ -128,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="cycle.ico" />
+    <None Include="Resources\refresh.png" />
     <None Include="Resources\back.png" />
     <None Include="Resources\Selected.png" />
     <None Include="Resources\file.png" />

@@ -11,7 +11,7 @@ namespace DecryptedDesktop
 {
     public partial class AFolder : FileHead
     {
-        public AFolder(string Name, string path, string owner)
+        public AFolder(string Name, string path, string owner) : base()
         {
             InitializeComponent();
 
