@@ -22,7 +22,12 @@ namespace DecryptedDesktop
 
         private void All_Click(object sender, EventArgs e)
         {
-            Main.CurrentSelected = this;
+            if (!Main.CurrentSelected.Contains(this))
+            {
+                Main.CurrentSelected.Clear();
+                Main.CurrentSelected.Add(this);
+            }
+            else Main.CurrentSelected.Remove(this);
         }
 
         private void AFolder_DoubleClick(object sender, EventArgs e)

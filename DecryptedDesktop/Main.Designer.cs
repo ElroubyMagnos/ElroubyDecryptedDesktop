@@ -31,36 +31,37 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
-            this.Back = new System.Windows.Forms.ToolStripMenuItem();
-            this.RefreshFiles = new System.Windows.Forms.ToolStripMenuItem();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Import = new System.Windows.Forms.ToolStripMenuItem();
-            this.Import_File = new System.Windows.Forms.ToolStripMenuItem();
-            this.Import_Folder = new System.Windows.Forms.ToolStripMenuItem();
-            this.Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.programToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.youtubeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.linkedInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.facebookPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.facebookAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tiktokToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.instagramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeSpace = new System.Windows.Forms.FlowLayoutPanel();
             this.OP = new System.Windows.Forms.OpenFileDialog();
             this.FD = new System.Windows.Forms.FolderBrowserDialog();
             this.CurrentDIR = new System.Windows.Forms.TextBox();
             this.FileLoad = new System.Windows.Forms.Timer(this.components);
+            this.Back = new System.Windows.Forms.ToolStripMenuItem();
+            this.RefreshFiles = new System.Windows.Forms.ToolStripMenuItem();
+            this.Import = new System.Windows.Forms.ToolStripMenuItem();
+            this.Import_File = new System.Windows.Forms.ToolStripMenuItem();
+            this.Import_Folder = new System.Windows.Forms.ToolStripMenuItem();
+            this.Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.NewFolder = new System.Windows.Forms.ToolStripMenuItem();
+            this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.youtubeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.linkedInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.facebookPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.facebookAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tiktokToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,59 +79,21 @@
             this.MenuStrip.Size = new System.Drawing.Size(800, 24);
             this.MenuStrip.TabIndex = 2;
             // 
-            // Back
-            // 
-            this.Back.Image = global::DecryptedDesktop.Properties.Resources.back;
-            this.Back.Name = "Back";
-            this.Back.Size = new System.Drawing.Size(28, 20);
-            this.Back.Click += new System.EventHandler(this.Back_Click);
-            // 
-            // RefreshFiles
-            // 
-            this.RefreshFiles.Image = global::DecryptedDesktop.Properties.Resources.refresh;
-            this.RefreshFiles.Name = "RefreshFiles";
-            this.RefreshFiles.Size = new System.Drawing.Size(28, 20);
-            this.RefreshFiles.Click += new System.EventHandler(this.RefreshFiles_Click);
-            // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Import,
-            this.Export});
+            this.Export,
+            this.toolStripSeparator2,
+            this.NewFolder});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // Import
+            // toolStripSeparator2
             // 
-            this.Import.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Import_File,
-            this.Import_Folder});
-            this.Import.Name = "Import";
-            this.Import.Size = new System.Drawing.Size(180, 22);
-            this.Import.Text = "Import";
-            this.Import.Click += new System.EventHandler(this.Import_Click);
-            // 
-            // Import_File
-            // 
-            this.Import_File.Image = global::DecryptedDesktop.Properties.Resources.File;
-            this.Import_File.Name = "Import_File";
-            this.Import_File.Size = new System.Drawing.Size(180, 22);
-            this.Import_File.Text = "File";
-            this.Import_File.Click += new System.EventHandler(this.Import_File_Click);
-            // 
-            // Import_Folder
-            // 
-            this.Import_Folder.Image = global::DecryptedDesktop.Properties.Resources.Folder;
-            this.Import_Folder.Name = "Import_Folder";
-            this.Import_Folder.Size = new System.Drawing.Size(180, 22);
-            this.Import_Folder.Text = "Folder";
-            // 
-            // Export
-            // 
-            this.Export.Name = "Export";
-            this.Export.Size = new System.Drawing.Size(180, 22);
-            this.Export.Text = "Export";
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(174, 6);
             // 
             // editToolStripMenuItem
             // 
@@ -145,61 +108,18 @@
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "Edit";
             // 
-            // cutToolStripMenuItem
-            // 
-            this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.cutToolStripMenuItem.Text = "Cut";
-            // 
-            // copyToolStripMenuItem
-            // 
-            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.copyToolStripMenuItem.Text = "Copy";
-            // 
-            // pasteToolStripMenuItem
-            // 
-            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.pasteToolStripMenuItem.Text = "Paste";
-            // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.deleteToolStripMenuItem.Text = "Delete";
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(119, 6);
-            // 
-            // selectAllToolStripMenuItem
-            // 
-            this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.selectAllToolStripMenuItem.Text = "Select All";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(161, 6);
             // 
             // userToolStripMenuItem
             // 
             this.userToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.logOutToolStripMenuItem,
-            this.deleteUserToolStripMenuItem});
+            this.logOutToolStripMenuItem});
             this.userToolStripMenuItem.Name = "userToolStripMenuItem";
             this.userToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
             this.userToolStripMenuItem.Text = "User";
-            // 
-            // logOutToolStripMenuItem
-            // 
-            this.logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
-            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.logOutToolStripMenuItem.Text = "Log out";
-            // 
-            // deleteUserToolStripMenuItem
-            // 
-            this.deleteUserToolStripMenuItem.Name = "deleteUserToolStripMenuItem";
-            this.deleteUserToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.deleteUserToolStripMenuItem.Text = "Delete User";
             // 
             // programToolStripMenuItem
             // 
@@ -215,46 +135,11 @@
             this.programToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.programToolStripMenuItem.Text = "Program";
             // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            // 
-            // youtubeToolStripMenuItem
-            // 
-            this.youtubeToolStripMenuItem.Name = "youtubeToolStripMenuItem";
-            this.youtubeToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.youtubeToolStripMenuItem.Text = "Youtube";
-            // 
-            // linkedInToolStripMenuItem
-            // 
-            this.linkedInToolStripMenuItem.Name = "linkedInToolStripMenuItem";
-            this.linkedInToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.linkedInToolStripMenuItem.Text = "LinkedIn";
-            // 
-            // facebookPageToolStripMenuItem
-            // 
-            this.facebookPageToolStripMenuItem.Name = "facebookPageToolStripMenuItem";
-            this.facebookPageToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.facebookPageToolStripMenuItem.Text = "Facebook Page";
-            // 
-            // facebookAccountToolStripMenuItem
-            // 
-            this.facebookAccountToolStripMenuItem.Name = "facebookAccountToolStripMenuItem";
-            this.facebookAccountToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.facebookAccountToolStripMenuItem.Text = "Facebook Account";
-            // 
-            // tiktokToolStripMenuItem
-            // 
-            this.tiktokToolStripMenuItem.Name = "tiktokToolStripMenuItem";
-            this.tiktokToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.tiktokToolStripMenuItem.Text = "Tiktok";
-            // 
             // instagramToolStripMenuItem
             // 
+            this.instagramToolStripMenuItem.Image = global::DecryptedDesktop.Properties.Resources.Instagram;
             this.instagramToolStripMenuItem.Name = "instagramToolStripMenuItem";
-            this.instagramToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.instagramToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.instagramToolStripMenuItem.Text = "Instagram";
             // 
             // DeSpace
@@ -265,10 +150,6 @@
             this.DeSpace.Name = "DeSpace";
             this.DeSpace.Size = new System.Drawing.Size(800, 400);
             this.DeSpace.TabIndex = 1;
-            // 
-            // OP
-            // 
-            this.OP.FileName = "openFileDialog1";
             // 
             // CurrentDIR
             // 
@@ -285,6 +166,159 @@
             // 
             this.FileLoad.Enabled = true;
             this.FileLoad.Interval = 500;
+            // 
+            // Back
+            // 
+            this.Back.Image = global::DecryptedDesktop.Properties.Resources.back;
+            this.Back.Name = "Back";
+            this.Back.ShortcutKeyDisplayString = "";
+            this.Back.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
+            this.Back.Size = new System.Drawing.Size(28, 20);
+            this.Back.Click += new System.EventHandler(this.Back_Click);
+            // 
+            // RefreshFiles
+            // 
+            this.RefreshFiles.Image = global::DecryptedDesktop.Properties.Resources.refresh;
+            this.RefreshFiles.Name = "RefreshFiles";
+            this.RefreshFiles.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F5)));
+            this.RefreshFiles.Size = new System.Drawing.Size(28, 20);
+            this.RefreshFiles.Click += new System.EventHandler(this.RefreshFiles_Click);
+            // 
+            // Import
+            // 
+            this.Import.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Import_File,
+            this.Import_Folder});
+            this.Import.Image = global::DecryptedDesktop.Properties.Resources.import;
+            this.Import.Name = "Import";
+            this.Import.Size = new System.Drawing.Size(177, 22);
+            this.Import.Text = "Import";
+            // 
+            // Import_File
+            // 
+            this.Import_File.Image = global::DecryptedDesktop.Properties.Resources.File;
+            this.Import_File.Name = "Import_File";
+            this.Import_File.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.Import_File.Size = new System.Drawing.Size(149, 22);
+            this.Import_File.Text = "File";
+            this.Import_File.Click += new System.EventHandler(this.Import_File_Click);
+            // 
+            // Import_Folder
+            // 
+            this.Import_Folder.Image = global::DecryptedDesktop.Properties.Resources.Folder;
+            this.Import_Folder.Name = "Import_Folder";
+            this.Import_Folder.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.Import_Folder.Size = new System.Drawing.Size(149, 22);
+            this.Import_Folder.Text = "Folder";
+            // 
+            // Export
+            // 
+            this.Export.Image = global::DecryptedDesktop.Properties.Resources.export;
+            this.Export.Name = "Export";
+            this.Export.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.Export.Size = new System.Drawing.Size(177, 22);
+            this.Export.Text = "Export";
+            this.Export.Click += new System.EventHandler(this.Export_Click);
+            // 
+            // NewFolder
+            // 
+            this.NewFolder.Image = global::DecryptedDesktop.Properties.Resources.New_Folder;
+            this.NewFolder.Name = "NewFolder";
+            this.NewFolder.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.NewFolder.Size = new System.Drawing.Size(177, 22);
+            this.NewFolder.Text = "New Folder";
+            this.NewFolder.Click += new System.EventHandler(this.NewFolder_Click);
+            // 
+            // cutToolStripMenuItem
+            // 
+            this.cutToolStripMenuItem.Image = global::DecryptedDesktop.Properties.Resources.cut;
+            this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
+            this.cutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.cutToolStripMenuItem.Text = "Cut";
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Image = global::DecryptedDesktop.Properties.Resources.copy;
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.copyToolStripMenuItem.Text = "Copy";
+            // 
+            // pasteToolStripMenuItem
+            // 
+            this.pasteToolStripMenuItem.Image = global::DecryptedDesktop.Properties.Resources.past;
+            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+            this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.pasteToolStripMenuItem.Text = "Paste";
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Image = global::DecryptedDesktop.Properties.Resources.delete;
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            // 
+            // selectAllToolStripMenuItem
+            // 
+            this.selectAllToolStripMenuItem.Image = global::DecryptedDesktop.Properties.Resources.selectall;
+            this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
+            this.selectAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.selectAllToolStripMenuItem.Text = "Select All";
+            // 
+            // logOutToolStripMenuItem
+            // 
+            this.logOutToolStripMenuItem.Image = global::DecryptedDesktop.Properties.Resources.userout;
+            this.logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
+            this.logOutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
+            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.logOutToolStripMenuItem.Text = "Log out";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Image = global::DecryptedDesktop.Properties.Resources.mine;
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            // 
+            // youtubeToolStripMenuItem
+            // 
+            this.youtubeToolStripMenuItem.Image = global::DecryptedDesktop.Properties.Resources.youtube;
+            this.youtubeToolStripMenuItem.Name = "youtubeToolStripMenuItem";
+            this.youtubeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.youtubeToolStripMenuItem.Text = "Youtube";
+            // 
+            // linkedInToolStripMenuItem
+            // 
+            this.linkedInToolStripMenuItem.Image = global::DecryptedDesktop.Properties.Resources.LinkedIn;
+            this.linkedInToolStripMenuItem.Name = "linkedInToolStripMenuItem";
+            this.linkedInToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.linkedInToolStripMenuItem.Text = "LinkedIn";
+            // 
+            // facebookPageToolStripMenuItem
+            // 
+            this.facebookPageToolStripMenuItem.Image = global::DecryptedDesktop.Properties.Resources.Facebook;
+            this.facebookPageToolStripMenuItem.Name = "facebookPageToolStripMenuItem";
+            this.facebookPageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.facebookPageToolStripMenuItem.Text = "Facebook Page";
+            // 
+            // facebookAccountToolStripMenuItem
+            // 
+            this.facebookAccountToolStripMenuItem.Image = global::DecryptedDesktop.Properties.Resources.Facebook;
+            this.facebookAccountToolStripMenuItem.Name = "facebookAccountToolStripMenuItem";
+            this.facebookAccountToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.facebookAccountToolStripMenuItem.Text = "Facebook Account";
+            // 
+            // tiktokToolStripMenuItem
+            // 
+            this.tiktokToolStripMenuItem.Image = global::DecryptedDesktop.Properties.Resources.tiktok;
+            this.tiktokToolStripMenuItem.Name = "tiktokToolStripMenuItem";
+            this.tiktokToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tiktokToolStripMenuItem.Text = "Tiktok";
             // 
             // Main
             // 
@@ -322,7 +356,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem userToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logOutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deleteUserToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem programToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem youtubeToolStripMenuItem;
@@ -340,6 +373,8 @@
         public System.Windows.Forms.TextBox CurrentDIR;
         private System.Windows.Forms.ToolStripMenuItem Back;
         private System.Windows.Forms.ToolStripMenuItem RefreshFiles;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem NewFolder;
     }
 }
 

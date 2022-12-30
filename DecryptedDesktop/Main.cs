@@ -15,7 +15,6 @@ namespace DecryptedDesktop
     public partial class Main : Form
     {
         public static User User { get; set; }
-        static FileHead _CS;
         public static ListVoid<FileHead> CurrentSelected = new ListVoid<FileHead>();
         public Main()
         {
@@ -44,8 +43,17 @@ namespace DecryptedDesktop
         {
             TextBox CD = Login.MainForm.CurrentDIR;
             string[] CDText = CD.Text.Split('\\');
-            if (!CD.Text.Contains("\\")) 
+
+            if (!CD.Text.Contains("\\"))
                 CD.Text = "";
+            else if (CD.Text.Length > 0 && CD.Text.Contains("\\"))
+            {
+                if (CDText.Last().Length > 0)
+                    CD.Text = CD.Text.Remove(CD.Text.LastIndexOf("\\") - CDText.Last().Length);
+                else if (CDText.Last().Length == 0 && CDText.Length == 2)
+                    CD.Text = "";
+                else CD.Text = CD.Text.Remove(CD.Text.LastIndexOf("\\") - "\\".Length - CDText[CDText.Count() - 2].Length);
+            }
             else if (CDText.Last().Length == 0)
             {
                 CD.Text = CD.Text.Replace(CDText[CDText.Count() - 2] + "\\", "");
@@ -83,7 +91,7 @@ namespace DecryptedDesktop
                         {
                             AFile TheFile = new AFile(Finfo.Name, Finfo.FullName, User.Username);
                             DeSpace.Controls.Add(TheFile);
-                            TheFile.Pic.BackgroundImage = File.ReadAllText(Finfo.FullName).DecryptImage();
+                            TheFile.PB.BackgroundImage = File.ReadAllText(Finfo.FullName).DecryptImage();
                         }
                     }
                     else if (Finfo.FullName.ReadOwner() == User.Username && Finfo.FullName.ReadOwnerPassword() == User.Password)
@@ -106,29 +114,76 @@ namespace DecryptedDesktop
             CurrentDIR_TextChanged(sender, e);
         }
 
-        private void Import_Click(object sender, EventArgs e)
+        private void NewFolder_Click(object sender, EventArgs e)
         {
+            if (!Directory.Exists(Application.StartupPath + "\\Desktop\\" + User.Username + "\\" + CurrentDIR.Text + "\\New Folder"))
+            {
+                Directory.CreateDirectory(Application.StartupPath + "\\Desktop\\" + User.Username + "\\" + CurrentDIR.Text + "\\New Folder");
+                CurrentDIR_TextChanged(sender, e);
+            }
+            else MessageBox.Show("Folder already exist", "Stop", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 
+        private void Export_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog FBD = new FolderBrowserDialog();
+            if (FBD.ShowDialog() == DialogResult.OK)
+            {
+                foreach (FileHead FH in CurrentSelected)
+                {
+                    if (FH is AFile)
+                    {
+                        string[] RN = FH.TheName.Text.Split('.');
+                        string RealName = RN[0] + "." + RN[1];
+                        string Extension = FH.TheName.Text.Substring(FH.TheName.Text.IndexOf(".")).Split('.')[1];
+                        if (Extension.IsImage())
+                        {
+                            File.ReadAllText(FH.Path).DecryptImage().Save(FBD.SelectedPath + "\\" + RealName);
+                        }
+                        else
+                        {
+                            File.WriteAllBytes(FBD.SelectedPath + "\\" + RealName, File.ReadAllText(FH.Path).DecFile());
+                        }
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
         }
     }
 
-    public class ListVoid<FileHead> : List<FileHead>
+    public class ListVoid<T> : List<T>
     {
         public ListVoid() : base()
         {
 
         }
 
-        public new void Add(FileHead FH)
+        public new void Add(T FH)
         {
             base.Add(FH);
-            FH.Pic.Image = Properties.Resources.Selected;
+            (FH as FileHead).PB.Image = Properties.Resources.Selected;
         }
 
-        public new void Remove(FileHead FH)
+        public new void Remove(T FH)
         {
             base.Remove(FH);
-            FH.Pic.Image = null;
+            (FH as FileHead).PB.Image = null;
+        }
+
+        public new void Clear()
+        {
+            List<T> Removed = new List<T>();
+            foreach (T FH in this)
+            {
+                Removed.Add(FH);
+            }
+            foreach (T FH in Removed)
+            {
+                Remove(FH);
+            }
         }
     }
 }

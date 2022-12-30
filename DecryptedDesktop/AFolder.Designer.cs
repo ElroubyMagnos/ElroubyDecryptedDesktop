@@ -28,28 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TheName = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB)).BeginInit();
             this.SuspendLayout();
             // 
-            // Pic
+            // PB
             // 
-            this.Pic.BackgroundImage = global::DecryptedDesktop.Properties.Resources.Folder;
-            this.Pic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Pic.Size = new System.Drawing.Size(100, 78);
-            this.Pic.Click += new System.EventHandler(this.All_Click);
-            this.Pic.DoubleClick += new System.EventHandler(this.AFolder_DoubleClick);
+            this.PB.BackgroundImage = global::DecryptedDesktop.Properties.Resources.Folder;
+            this.PB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PB.Size = new System.Drawing.Size(100, 78);
+            this.PB.Click += new System.EventHandler(this.All_Click);
+            this.PB.DoubleClick += new System.EventHandler(this.AFolder_DoubleClick);
             // 
             // TheName
             // 
-            this.TheName.AutoSize = true;
             this.TheName.Location = new System.Drawing.Point(3, 81);
-            this.TheName.Name = "TheName";
-            this.TheName.Size = new System.Drawing.Size(35, 13);
-            this.TheName.TabIndex = 3;
-            this.TheName.Text = "Name";
-            this.TheName.Click += new System.EventHandler(this.All_Click);
-            this.TheName.DoubleClick += new System.EventHandler(this.AFolder_DoubleClick);
             // 
             // AFolder
             // 
@@ -57,21 +49,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Controls.Add(this.TheName);
             this.Name = "AFolder";
             this.Size = new System.Drawing.Size(100, 100);
             this.Click += new System.EventHandler(this.All_Click);
             this.DoubleClick += new System.EventHandler(this.AFolder_DoubleClick);
-            this.Controls.SetChildIndex(this.TheName, 0);
-            this.Controls.SetChildIndex(this.Pic, 0);
-            ((System.ComponentModel.ISupportInitialize)(this.Pic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label TheName;
     }
 }

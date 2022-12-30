@@ -24,13 +24,30 @@ namespace DecryptedDesktop
 
         private void All_Click(object sender, EventArgs e)
         {
-            Main.CurrentSelected = this;
+            if (!Main.CurrentSelected.Contains(this))
+            {
+                Main.CurrentSelected.Add(this);
+
+                List<FileHead> Removed = new List<FileHead>();
+
+                foreach (FileHead FH in Main.CurrentSelected)
+                {
+                    if (FH is AFolder)
+                        Removed.Add(FH);
+                }
+
+                foreach (FileHead FH in Removed)
+                {
+                    Main.CurrentSelected.Remove(FH);
+                }
+            }
+            else Main.CurrentSelected.Remove(this);
         }
 
         private void All_DoubleClick(object sender, EventArgs e)
         {
             string Extension = TheName.Text.Substring(TheName.Text.IndexOf(".")).Split('.')[1];
-            if (Extension == "jpg" || Extension == "png" || Extension == "bmp" || Extension == "gif" || Extension == "tga" || Extension == "pic" || Extension == "tiff")
+            if (Extension.IsImage())
             {
                 Exporter.FileName = TheName.Text.Split('.')[0] + "." + TheName.Text.Split('.')[1];
                 if (Exporter.ShowDialog() == DialogResult.OK)
