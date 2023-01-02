@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using Crypto;
 using System.Threading;
+using System.Reflection.Emit;
 
 namespace DecryptedDesktop
 {
@@ -28,12 +29,12 @@ namespace DecryptedDesktop
                 string Extension = Path.GetExtension(OP.FileName).Replace(".", "");
                 if (Extension == "jpg" || Extension == "png" || Extension == "bmp" || Extension == "gif" || Extension == "tga" || Extension == "pic" || Extension == "tiff")
                 {
-                    File.WriteAllText(Application.StartupPath + $"\\Desktop\\{User.Username}\\" + OP.FileName.Split('\\').Last() + ".roby", Image.FromFile(OP.FileName).EncryptImage());
+                    File.WriteAllText(Application.StartupPath + $"\\Desktop\\{User.Username}\\{CurrentDIR.Text}" + OP.FileName.Split('\\').Last() + ".roby", Image.FromFile(OP.FileName).EncryptImage());
 
                     AFile F = new AFile(OP.FileName.Split('\\').Last(), Application.StartupPath + $"\\Desktop\\{User.Username}\\" + OP.FileName.Split('\\').Last(), User.Username);
                     DeSpace.Controls.Add(F);
                 } 
-                else File.WriteAllText(Application.StartupPath + $"\\Desktop\\{User.Username}\\" + OP.FileName.Split('\\').Last() + ".roby", File.ReadAllBytes(OP.FileName).EncFile());
+                else File.WriteAllText(Application.StartupPath + $"\\Desktop\\{User.Username}\\{CurrentDIR.Text}" + OP.FileName.Split('\\').Last() + ".roby", File.ReadAllBytes(OP.FileName).EncFile());
             }
 
             CurrentDIR_TextChanged(sender, e);
@@ -41,28 +42,32 @@ namespace DecryptedDesktop
 
         private void Back_Click(object sender, EventArgs e)
         {
-            TextBox CD = Login.MainForm.CurrentDIR;
-            string[] CDText = CD.Text.Split('\\');
+            string TheDIR = CurrentDIR.Text;
+            if (TheDIR.Last() == '\\')
+            {
+                TheDIR = TheDIR.Remove(TheDIR.Length - 1, 1);
+            }
 
-            if (!CD.Text.Contains("\\"))
-                CD.Text = "";
-            else if (CD.Text.Length > 0 && CD.Text.Contains("\\"))
+            string BackDIR = "";
+
+            string[] TheDirX = TheDIR.Split('\\');
+
+            int SlashCount = 0;
+
+            for (int i = 0; i < TheDIR.Length; i++)
             {
-                if (CDText.Last().Length > 0)
-                    CD.Text = CD.Text.Remove(CD.Text.LastIndexOf("\\") - CDText.Last().Length);
-                else if (CDText.Last().Length == 0 && CDText.Length == 2)
-                    CD.Text = "";
-                else CD.Text = CD.Text.Remove(CD.Text.LastIndexOf("\\") - "\\".Length - CDText[CDText.Count() - 2].Length);
+                if (TheDIR[i] == '\\') SlashCount++;
+                if (TheDirX.Length - 1 == SlashCount)
+                    break;
+                BackDIR += TheDIR[i];
             }
-            else if (CDText.Last().Length == 0)
-            {
-                CD.Text = CD.Text.Replace(CDText[CDText.Count() - 2] + "\\", "");
-            }
+
+            CurrentDIR.Text = BackDIR;
         }
 
         private void CurrentDIR_TextChanged(object sender, EventArgs e)
         {
-            DirectoryInfo DI = new DirectoryInfo(Application.StartupPath + $"\\Desktop\\{User.Username}\\" + CurrentDIR.Text);
+            DirectoryInfo DI = new DirectoryInfo(Application.StartupPath + $"\\Desktop\\{User.Username}\\" + CurrentDIR.Text + "\\");
             FileInfo[] AllFiles = DI.GetFiles();
             DirectoryInfo[] AllFolders = DI.GetDirectories();
 
@@ -147,10 +152,203 @@ namespace DecryptedDesktop
                     }
                     else
                     {
+                        string FullBasket = FH.Path.Terminator(FBD.SelectedPath, User.Username);
+                        Directory.CreateDirectory(FullBasket);
+                        foreach (string dirPath in Directory.GetDirectories(FH.Path, "*", SearchOption.AllDirectories))
+                        {
+                            Directory.CreateDirectory(dirPath.Replace(FH.Path, FullBasket));
+                        }
 
+                        foreach (string newPath in Directory.GetFiles(FH.Path, "*.roby", SearchOption.AllDirectories))
+                        {
+                            if (Path.GetExtension(newPath.Replace(".roby", "")).Replace(".", "").IsImage())
+                            {
+                                File.ReadAllText(newPath).DecryptImage().Save(newPath.Terminator(FBD.SelectedPath, User.Username).Replace(".roby\\", ""));
+                            }
+                            else File.WriteAllBytes(newPath.Terminator(FBD.SelectedPath, User.Username).Replace(".roby\\", ""), File.ReadAllText(newPath).DecFile()); 
+                        }
                     }
                 }
             }
+        }
+
+        private void Import_Folder_Click(object sender, EventArgs e)
+        {
+            if (FD.ShowDialog() == DialogResult.OK)
+            {
+                string FullBasket = Application.StartupPath + "\\Desktop\\" + User.Username + "\\" + CurrentDIR.Text + "\\" + FD.SelectedPath.Split('\\').Last();
+                Directory.CreateDirectory(FullBasket);
+
+                string MainDIR = FullBasket.Split('\\').Last();
+                foreach (string DIR in Directory.GetDirectories(FD.SelectedPath, "*", SearchOption.AllDirectories))
+                {
+                    string TheDIR = DIR.Substring(DIR.LastIndexOf(MainDIR));
+                    TheDIR = Application.StartupPath + "\\Desktop\\" + User.Username + "\\" + CurrentDIR.Text + "\\" + TheDIR;
+                    Directory.CreateDirectory(TheDIR);
+                }
+
+                foreach (string FileDIR in Directory.GetFiles(FD.SelectedPath, "*.*", SearchOption.AllDirectories))
+                {
+                    string TheDIR = FileDIR.Substring(FileDIR.LastIndexOf(MainDIR));
+                    TheDIR = Application.StartupPath + "\\Desktop\\" + User.Username + "\\" + CurrentDIR.Text + "\\" + TheDIR;
+
+                    if (Path.GetExtension(FileDIR).Replace(".", "").IsImage())
+                        File.WriteAllText(TheDIR + ".roby", Image.FromFile(FileDIR).EncryptImage());
+                    else File.WriteAllText(TheDIR + ".roby", File.ReadAllBytes(FileDIR).EncFile());
+                }
+            }
+
+            CurrentDIR_TextChanged(sender, e);
+        }
+
+        private void FileCon_Opening(object sender, CancelEventArgs e)
+        {
+            MS_Paste.Enabled = MyClipBoard.All.Count > 0;
+        }
+
+        private void Menu_Edit_Click(object sender, EventArgs e)
+        {
+            Paste.Enabled = MyClipBoard.All.Count > 0;
+        }
+
+        private void Cut_Click(object sender, EventArgs e)
+        {
+            if (CurrentSelected.Count == 1)
+            {
+                MyClipBoard.All.Add(CurrentSelected[0], MyClipBoard.OperationType.Cut);
+            }
+            else if (CurrentSelected.Count != 0)
+            {
+                MyClipBoard.All.GroupAdd(MyClipBoard.OperationType.Cut, CurrentSelected.ToArray());
+            }
+        }
+
+        private void Copy_Click(object sender, EventArgs e)
+        {
+            if (CurrentSelected.Count == 1)
+            {
+                MyClipBoard.All.Add(CurrentSelected[0], MyClipBoard.OperationType.Copy);
+            }
+            else if (CurrentSelected.Count != 0)
+            {
+                MyClipBoard.All.GroupAdd(MyClipBoard.OperationType.Copy, CurrentSelected.ToArray());
+            }
+        }
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MyClipBoard.All.Clear();
+        }
+
+        private void MS_Cut_Click(object sender, EventArgs e)
+        {
+            Cut_Click(sender, e);
+        }
+
+        private void MS_Copy_Click(object sender, EventArgs e)
+        {
+            Copy_Click(sender, e);
+        }
+
+        private void Paste_Click(object sender, EventArgs e)
+        {
+            foreach (KeyValuePair<FileHead, MyClipBoard.OperationType> OP in MyClipBoard.All)
+            {
+                string PastePath = Application.StartupPath + $"\\Desktop\\{User.Username}\\{CurrentDIR.Text}\\{OP.Key.TheName.Text}";
+                if (OP.Key is AFile)
+                {
+                    if (File.Exists(PastePath))
+                    {
+                        DialogResult Result = MessageBox.Show("The File is already exist with the same path, Do you want to replace it?", "Wait", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                        if (Result == DialogResult.Cancel) return;
+                    }
+                    File.WriteAllBytes(PastePath, File.ReadAllBytes(OP.Key.Path));
+
+                    if (OP.Value == MyClipBoard.OperationType.Cut)
+                    {
+                        File.Delete(OP.Key.Path);
+                    }
+                }
+                else
+                {
+                    CopyFilesRecursively(OP.Key.Path, PastePath);
+
+                    void CopyFilesRecursively(string sourcePath, string targetPath)
+                    {
+                        //Now Create all of the directories
+                        foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
+                        {
+                            Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
+                        }
+
+                        //Copy all the files & Replaces any files with the same name
+                        foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
+                        {
+                            File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
+                        }
+
+                        if (OP.Value == MyClipBoard.OperationType.Cut)
+                            Directory.Delete(OP.Key.Path, true);
+                    }
+                }
+            }
+
+            MyClipBoard.All.Clear();
+            CurrentDIR_TextChanged(sender, e);
+        }
+
+        private void MS_Paste_Click(object sender, EventArgs e)
+        {
+            Paste_Click(sender, e);
+        }
+
+        private void Delete_Click(object sender, EventArgs e)
+        {
+            foreach (FileHead FH in CurrentSelected)
+            {
+                if (FH is AFile)
+                    File.Delete(FH.Path);
+                else DeleteDirectory(FH.Path);
+            }
+
+            CurrentDIR_TextChanged(sender, e);
+        }
+
+        public static void DeleteDirectory(string target_dir)
+        {
+            string[] files = Directory.GetFiles(target_dir);
+            string[] dirs = Directory.GetDirectories(target_dir);
+
+            foreach (string file in files)
+            {
+                File.SetAttributes(file, FileAttributes.Normal);
+                File.Delete(file);
+            }
+
+            foreach (string dir in dirs)
+            {
+                DeleteDirectory(dir);
+            }
+
+            Directory.Delete(target_dir, false);
+        }
+
+        private void MS_Delete_Click(object sender, EventArgs e)
+        {
+            Delete_Click(sender, e);
+        }
+
+        private void SelectAll_Click(object sender, EventArgs e)
+        {
+            foreach (AFile AF in DeSpace.Controls.OfType<AFile>())
+            {
+                CurrentSelected.Add(AF);
+            }
+        }
+
+        private void MS_SelectAll_Click(object sender, EventArgs e)
+        {
+            SelectAll_Click(sender, e);
         }
     }
 

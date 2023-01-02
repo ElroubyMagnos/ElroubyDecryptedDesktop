@@ -11,6 +11,23 @@ namespace DecryptedDesktop
 {
     public static class FilesControl
     {
+        public static string Terminator(this string Data, string Path, string StopText)
+        {
+            string[] FHPath = Data.Split('\\');
+            string Basket = "";
+            bool Moved = false;
+            for (int i = 0; i < FHPath.Length; i++)
+            {
+                if (Moved)
+                {
+                    Basket += FHPath[i] + "\\";
+                }
+                if (FHPath[i] == StopText)
+                    Moved = true;
+            }
+
+            return Path + "\\" + Basket;
+        }
         public static bool IsImage(this string Extension)
         {
             return Extension == "jpg" || Extension == "png" || Extension == "bmp"
