@@ -13,13 +13,6 @@ namespace Crypto
 {
     public static class Crypto
     {
-        public static Image FromBytesToImage(this byte[] AllBytes)
-        {
-            using (var ms = new MemoryStream(AllBytes))
-            {
-                return Image.FromStream(ms);
-            }
-        }
         public static string ByteToString(this byte[] AllBytes)
         {
             return Encoding.UTF8.GetString(AllBytes);
@@ -110,89 +103,10 @@ namespace Crypto
             return Encoding.UTF8.GetString(buffer5, 0, count);
         }
         #endregion
-        #region Tenki
-        public static string ToTenki(this string Text)
-        {
-            string Data = "&";
-            foreach (char Char in Text) if (Tenki.ContainsKey(Char.ToString())) Data += Tenki[Char.ToString()] + "&";
-            return Data;
-        }
-        public static string FromTenki(this string Text)
-        {
-            string Data = "";
-            foreach (string row in Text.Split('&')) if (Tenki.ContainsValue(row)) Data += Tenki.FirstOrDefault(x => x.Value == row).Key;
-            return Data;
-        }
-        #endregion
         public static int ToInt32(this string Text)
         {
             try { return int.Parse(Regex.Replace(Text, @"[^\d]", "")); } catch { }
             return 0;
         }
-        public static readonly Dictionary<string, string> Tenki = new Dictionary<string, string>
-        {
-                { "1", "~" },
-                { "2", "$" },
-                { "3", "_" },
-                { "4", "=" },
-                { "5", "+" },
-                { "6", "-" },
-                { "7", "%" },
-                { "8", "#" },
-                { "9", "^" },
-                { "0", "/" },
-                {"a", "11"},
-                {"b", "22"},
-                {"c", "33"},
-                {"d", "44"},
-                {"e", "55"},
-                {"f", "66"},
-                {"g", "77"},
-                {"h", "88"},
-                {"i", "99"},
-                {"j", "111"},
-                {"k", "222"},
-                {"l", "333"},
-                {"m", "444"},
-                {"n", "555"},
-                {"o", "666"},
-                {"p", "777"},
-                {"q", "888"},
-                {"r", "999"},
-                {"s", "1111"},
-                {"t", "2222"},
-                {"u", "3333"},
-                {"v", "4444"},
-                {"w", "5555"},
-                {"x", "6666"},
-                {"y", "7777"},
-                {"z", "8888"},
-                {"A", "11c"},
-                {"B", "22c"},
-                {"C", "33c"},
-                {"D", "44c"},
-                {"E", "55c"},
-                {"F", "66c"},
-                {"G", "77c"},
-                {"H", "88c"},
-                {"I", "99c"},
-                {"J", "111c"},
-                {"K", "222c"},
-                {"L", "333c"},
-                {"M", "444c"},
-                {"N", "555c"},
-                {"O", "666c"},
-                {"P", "777c"},
-                {"Q", "888c"},
-                {"R", "999c"},
-                {"S", "1111c"},
-                {"T", "2222c"},
-                {"U", "3333c"},
-                {"V", "4444c"},
-                {"W", "5555c"},
-                {"X", "6666c"},
-                {"Y", "7777c"},
-                {"Z", "8888c"}
-        };
     }
 }

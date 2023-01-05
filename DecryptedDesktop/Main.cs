@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.IO;
-using Crypto;
-using System.Threading;
-using System.Reflection.Emit;
+using System.Linq;
+using System.Runtime.Remoting.Messaging;
+using System.Windows.Forms;
 
 namespace DecryptedDesktop
 {
@@ -27,13 +23,17 @@ namespace DecryptedDesktop
             if (OP.ShowDialog() == DialogResult.OK)
             {
                 string Extension = Path.GetExtension(OP.FileName).Replace(".", "");
-                if (Extension == "jpg" || Extension == "png" || Extension == "bmp" || Extension == "gif" || Extension == "tga" || Extension == "pic" || Extension == "tiff")
+                if (Extension.IsImage())
                 {
                     File.WriteAllText(Application.StartupPath + $"\\Desktop\\{User.Username}\\{CurrentDIR.Text}" + OP.FileName.Split('\\').Last() + ".roby", Image.FromFile(OP.FileName).EncryptImage());
 
                     AFile F = new AFile(OP.FileName.Split('\\').Last(), Application.StartupPath + $"\\Desktop\\{User.Username}\\" + OP.FileName.Split('\\').Last(), User.Username);
                     DeSpace.Controls.Add(F);
-                } 
+                }
+                else if (Extension.IsVideo())
+                {
+                    File.WriteAllText(Application.StartupPath + $"\\Desktop\\{User.Username}\\{CurrentDIR.Text}" + OP.FileName.Split('\\').Last() + ".roby", File.ReadAllBytes(OP.FileName).FromVideo());
+                }
                 else File.WriteAllText(Application.StartupPath + $"\\Desktop\\{User.Username}\\{CurrentDIR.Text}" + OP.FileName.Split('\\').Last() + ".roby", File.ReadAllBytes(OP.FileName).EncFile());
             }
 
@@ -99,6 +99,14 @@ namespace DecryptedDesktop
                             TheFile.PB.BackgroundImage = File.ReadAllText(Finfo.FullName).DecryptImage();
                         }
                     }
+                    else if (Finfo.Name.Split('.')[1].IsVideo())
+                    {
+                        if (Finfo.FullName.ReadOwner() == User.Username && Finfo.FullName.ReadImageOwnerPassword() == User.Password)
+                        {
+                            AFile TheFile = new AFile(Finfo.Name, Finfo.FullName, User.Username);
+                            DeSpace.Controls.Add(TheFile);
+                        }
+                    }
                     else if (Finfo.FullName.ReadOwner() == User.Username && Finfo.FullName.ReadOwnerPassword() == User.Password)
                     {
                         DeSpace.Controls.Add(new AFile(Finfo.Name, Finfo.FullName, User.Username));
@@ -145,6 +153,10 @@ namespace DecryptedDesktop
                         {
                             File.ReadAllText(FH.Path).DecryptImage().Save(FBD.SelectedPath + "\\" + RealName);
                         }
+                        else if (Extension.IsVideo())
+                        {
+                            File.WriteAllBytes(FBD.SelectedPath + "\\" + RealName, File.ReadAllText(FH.Path).ToVideo());
+                        }
                         else
                         {
                             File.WriteAllBytes(FBD.SelectedPath + "\\" + RealName, File.ReadAllText(FH.Path).DecFile());
@@ -161,11 +173,16 @@ namespace DecryptedDesktop
 
                         foreach (string newPath in Directory.GetFiles(FH.Path, "*.roby", SearchOption.AllDirectories))
                         {
-                            if (Path.GetExtension(newPath.Replace(".roby", "")).Replace(".", "").IsImage())
+                            string Extension = Path.GetExtension(newPath.Replace(".roby", "")).Replace(".", "");
+                            if (Extension.IsImage())
                             {
                                 File.ReadAllText(newPath).DecryptImage().Save(newPath.Terminator(FBD.SelectedPath, User.Username).Replace(".roby\\", ""));
                             }
-                            else File.WriteAllBytes(newPath.Terminator(FBD.SelectedPath, User.Username).Replace(".roby\\", ""), File.ReadAllText(newPath).DecFile()); 
+                            else if (Extension.IsVideo())
+                            {
+                                File.WriteAllBytes(newPath.Terminator(FBD.SelectedPath, User.Username).Replace(".roby\\", ""), File.ReadAllText(newPath).ToVideo());
+                            }
+                            else File.WriteAllBytes(newPath.Terminator(FBD.SelectedPath, User.Username).Replace(".roby\\", ""), File.ReadAllText(newPath).DecFile());
                         }
                     }
                 }
@@ -192,8 +209,14 @@ namespace DecryptedDesktop
                     string TheDIR = FileDIR.Substring(FileDIR.LastIndexOf(MainDIR));
                     TheDIR = Application.StartupPath + "\\Desktop\\" + User.Username + "\\" + CurrentDIR.Text + "\\" + TheDIR;
 
-                    if (Path.GetExtension(FileDIR).Replace(".", "").IsImage())
+                    string Extension = Path.GetExtension(FileDIR).Replace(".", "");
+
+                    if (Extension.IsImage())
                         File.WriteAllText(TheDIR + ".roby", Image.FromFile(FileDIR).EncryptImage());
+                    else if (Extension.IsVideo())
+                    {
+                        File.WriteAllText(TheDIR + ".roby", File.ReadAllBytes(FileDIR).FromVideo());
+                    }
                     else File.WriteAllText(TheDIR + ".roby", File.ReadAllBytes(FileDIR).EncFile());
                 }
             }
@@ -204,11 +227,18 @@ namespace DecryptedDesktop
         private void FileCon_Opening(object sender, CancelEventArgs e)
         {
             MS_Paste.Enabled = MyClipBoard.All.Count > 0;
+            MS_Delete.Enabled = MS_Paste.Enabled;
         }
 
         private void Menu_Edit_Click(object sender, EventArgs e)
         {
             Paste.Enabled = MyClipBoard.All.Count > 0;
+            Delete.Enabled = Paste.Enabled;
+        }
+
+        private void FileMenu_Click(object sender, EventArgs e)
+        {
+            Export.Enabled = CurrentSelected.Count > 0;
         }
 
         private void Cut_Click(object sender, EventArgs e)
@@ -349,6 +379,26 @@ namespace DecryptedDesktop
         private void MS_SelectAll_Click(object sender, EventArgs e)
         {
             SelectAll_Click(sender, e);
+        }
+
+        private void MS_Export_Click(object sender, EventArgs e)
+        {
+            Export_Click(sender, e);
+        }
+
+        private void MS_Import_File_Click(object sender, EventArgs e)
+        {
+            Import_File_Click(sender, e);
+        }
+
+        private void MS_Import_Folder_Click(object sender, EventArgs e)
+        {
+            Import_Folder_Click(sender, e);
+        }
+
+        private void MS_NewFolder_Click(object sender, EventArgs e)
+        {
+            NewFolder_Click(sender, e);
         }
     }
 

@@ -11,6 +11,18 @@ namespace DecryptedDesktop
 {
     public static class FilesControl
     {
+        public static byte[] ToVideo(this string Data)
+        {
+            string FirstDec = Data.Decrypt();
+            string SecondDec = FirstDec.Substring(FirstDec.IndexOf("Data=") + "Data=".Length);
+            byte[] ThirdDec = Convert.FromBase64String(SecondDec);
+
+            return ThirdDec;
+        }
+        public static string FromVideo(this byte[] TheVideo)
+        {
+             return ($"UN={Main.User.Username}\nPSS={Main.User.Password}\nData=" + Convert.ToBase64String(TheVideo)).Encrypt();
+        }
         public static string Terminator(this string Data, string Path, string StopText)
         {
             string[] FHPath = Data.Split('\\');
@@ -27,6 +39,12 @@ namespace DecryptedDesktop
             }
 
             return Path + "\\" + Basket;
+        }
+        public static bool IsVideo(this string Extension)
+        {
+            return Extension == "webm" || Extension == "mkv" || Extension == "flv"
+                || Extension == "avi" || Extension == "mp4" || Extension == "3gp"
+                || Extension == "ts";
         }
         public static bool IsImage(this string Extension)
         {

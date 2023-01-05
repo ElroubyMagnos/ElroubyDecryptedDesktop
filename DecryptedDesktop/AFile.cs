@@ -55,6 +55,14 @@ namespace DecryptedDesktop
                     File.ReadAllText(Path).DecryptImage().Save(Exporter.FileName);
                 }
             }
+            else if (Extension.IsVideo())
+            {
+                Exporter.FileName = TheName.Text.Split('.')[0] + "." + TheName.Text.Split('.')[1];
+                if (Exporter.ShowDialog() == DialogResult.OK)
+                {
+                    File.WriteAllBytes(Exporter.FileName, File.ReadAllText(Path).ToVideo());
+                }
+            }
             else
             {
                 Exporter.FileName = TheName.Text.Split('.')[0] + "." + TheName.Text.Split('.')[1];

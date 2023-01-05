@@ -33,7 +33,7 @@
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.Back = new System.Windows.Forms.ToolStripMenuItem();
             this.RefreshFiles = new System.Windows.Forms.ToolStripMenuItem();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.Import = new System.Windows.Forms.ToolStripMenuItem();
             this.Import_File = new System.Windows.Forms.ToolStripMenuItem();
             this.Import_Folder = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,9 +64,16 @@
             this.MS_Paste = new System.Windows.Forms.ToolStripMenuItem();
             this.MS_Delete = new System.Windows.Forms.ToolStripMenuItem();
             this.MS_SelectAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.MS_Import = new System.Windows.Forms.ToolStripMenuItem();
+            this.MS_Import_File = new System.Windows.Forms.ToolStripMenuItem();
+            this.MS_Import_Folder = new System.Windows.Forms.ToolStripMenuItem();
+            this.MS_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.OP = new System.Windows.Forms.OpenFileDialog();
             this.FD = new System.Windows.Forms.FolderBrowserDialog();
             this.CurrentDIR = new System.Windows.Forms.TextBox();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.MS_NewFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStrip.SuspendLayout();
             this.FileCon.SuspendLayout();
             this.SuspendLayout();
@@ -76,7 +83,7 @@
             this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Back,
             this.RefreshFiles,
-            this.fileToolStripMenuItem,
+            this.FileMenu,
             this.Menu_Edit,
             this.userToolStripMenuItem,
             this.programToolStripMenuItem});
@@ -102,16 +109,17 @@
             this.RefreshFiles.Size = new System.Drawing.Size(28, 20);
             this.RefreshFiles.Click += new System.EventHandler(this.RefreshFiles_Click);
             // 
-            // fileToolStripMenuItem
+            // FileMenu
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Import,
             this.Export,
             this.toolStripSeparator2,
             this.NewFolder});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
+            this.FileMenu.Name = "FileMenu";
+            this.FileMenu.Size = new System.Drawing.Size(37, 20);
+            this.FileMenu.Text = "File";
+            this.FileMenu.Click += new System.EventHandler(this.FileMenu_Click);
             // 
             // Import
             // 
@@ -120,7 +128,7 @@
             this.Import_Folder});
             this.Import.Image = global::DecryptedDesktop.Properties.Resources.import;
             this.Import.Name = "Import";
-            this.Import.Size = new System.Drawing.Size(177, 22);
+            this.Import.Size = new System.Drawing.Size(180, 22);
             this.Import.Text = "Import";
             // 
             // Import_File
@@ -146,21 +154,21 @@
             this.Export.Image = global::DecryptedDesktop.Properties.Resources.export;
             this.Export.Name = "Export";
             this.Export.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.Export.Size = new System.Drawing.Size(177, 22);
+            this.Export.Size = new System.Drawing.Size(180, 22);
             this.Export.Text = "Export";
             this.Export.Click += new System.EventHandler(this.Export_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(174, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // NewFolder
             // 
             this.NewFolder.Image = global::DecryptedDesktop.Properties.Resources.New_Folder;
             this.NewFolder.Name = "NewFolder";
             this.NewFolder.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.NewFolder.Size = new System.Drawing.Size(177, 22);
+            this.NewFolder.Size = new System.Drawing.Size(180, 22);
             this.NewFolder.Text = "New Folder";
             this.NewFolder.Click += new System.EventHandler(this.NewFolder_Click);
             // 
@@ -183,7 +191,7 @@
             this.Cut.Image = global::DecryptedDesktop.Properties.Resources.cut;
             this.Cut.Name = "Cut";
             this.Cut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.Cut.Size = new System.Drawing.Size(164, 22);
+            this.Cut.Size = new System.Drawing.Size(180, 22);
             this.Cut.Text = "Cut";
             this.Cut.Click += new System.EventHandler(this.Cut_Click);
             // 
@@ -192,7 +200,7 @@
             this.Copy.Image = global::DecryptedDesktop.Properties.Resources.copy;
             this.Copy.Name = "Copy";
             this.Copy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.Copy.Size = new System.Drawing.Size(164, 22);
+            this.Copy.Size = new System.Drawing.Size(180, 22);
             this.Copy.Text = "Copy";
             this.Copy.Click += new System.EventHandler(this.Copy_Click);
             // 
@@ -201,7 +209,7 @@
             this.Paste.Image = global::DecryptedDesktop.Properties.Resources.past;
             this.Paste.Name = "Paste";
             this.Paste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.Paste.Size = new System.Drawing.Size(164, 22);
+            this.Paste.Size = new System.Drawing.Size(180, 22);
             this.Paste.Text = "Paste";
             this.Paste.Click += new System.EventHandler(this.Paste_Click);
             // 
@@ -210,21 +218,21 @@
             this.Delete.Image = global::DecryptedDesktop.Properties.Resources.delete;
             this.Delete.Name = "Delete";
             this.Delete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.Delete.Size = new System.Drawing.Size(164, 22);
+            this.Delete.Size = new System.Drawing.Size(180, 22);
             this.Delete.Text = "Delete";
             this.Delete.Click += new System.EventHandler(this.Delete_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(161, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // SelectAll
             // 
             this.SelectAll.Image = global::DecryptedDesktop.Properties.Resources.selectall;
             this.SelectAll.Name = "SelectAll";
             this.SelectAll.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.SelectAll.Size = new System.Drawing.Size(164, 22);
+            this.SelectAll.Size = new System.Drawing.Size(180, 22);
             this.SelectAll.Text = "Select All";
             this.SelectAll.Click += new System.EventHandler(this.SelectAll_Click);
             // 
@@ -241,7 +249,7 @@
             this.logOutToolStripMenuItem.Image = global::DecryptedDesktop.Properties.Resources.userout;
             this.logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
             this.logOutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
-            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.logOutToolStripMenuItem.Text = "Log out";
             // 
             // programToolStripMenuItem
@@ -325,45 +333,94 @@
             this.MS_Copy,
             this.MS_Paste,
             this.MS_Delete,
-            this.MS_SelectAll});
+            this.MS_SelectAll,
+            this.toolStripSeparator3,
+            this.MS_Import,
+            this.MS_Export,
+            this.toolStripSeparator4,
+            this.MS_NewFolder});
             this.FileCon.Name = "FileCon";
-            this.FileCon.Size = new System.Drawing.Size(123, 114);
+            this.FileCon.Size = new System.Drawing.Size(135, 192);
             this.FileCon.Opening += new System.ComponentModel.CancelEventHandler(this.FileCon_Opening);
             // 
             // MS_Cut
             // 
+            this.MS_Cut.Image = global::DecryptedDesktop.Properties.Resources.cut;
             this.MS_Cut.Name = "MS_Cut";
-            this.MS_Cut.Size = new System.Drawing.Size(122, 22);
+            this.MS_Cut.Size = new System.Drawing.Size(134, 22);
             this.MS_Cut.Text = "Cut";
             this.MS_Cut.Click += new System.EventHandler(this.MS_Cut_Click);
             // 
             // MS_Copy
             // 
+            this.MS_Copy.Image = global::DecryptedDesktop.Properties.Resources.copy;
             this.MS_Copy.Name = "MS_Copy";
-            this.MS_Copy.Size = new System.Drawing.Size(122, 22);
+            this.MS_Copy.Size = new System.Drawing.Size(134, 22);
             this.MS_Copy.Text = "Copy";
             this.MS_Copy.Click += new System.EventHandler(this.MS_Copy_Click);
             // 
             // MS_Paste
             // 
+            this.MS_Paste.Image = global::DecryptedDesktop.Properties.Resources.past;
             this.MS_Paste.Name = "MS_Paste";
-            this.MS_Paste.Size = new System.Drawing.Size(122, 22);
+            this.MS_Paste.Size = new System.Drawing.Size(134, 22);
             this.MS_Paste.Text = "Paste";
             this.MS_Paste.Click += new System.EventHandler(this.MS_Paste_Click);
             // 
             // MS_Delete
             // 
+            this.MS_Delete.Image = global::DecryptedDesktop.Properties.Resources.delete;
             this.MS_Delete.Name = "MS_Delete";
-            this.MS_Delete.Size = new System.Drawing.Size(122, 22);
+            this.MS_Delete.Size = new System.Drawing.Size(134, 22);
             this.MS_Delete.Text = "Delete";
             this.MS_Delete.Click += new System.EventHandler(this.MS_Delete_Click);
             // 
             // MS_SelectAll
             // 
+            this.MS_SelectAll.Image = global::DecryptedDesktop.Properties.Resources.selectall;
             this.MS_SelectAll.Name = "MS_SelectAll";
-            this.MS_SelectAll.Size = new System.Drawing.Size(122, 22);
+            this.MS_SelectAll.Size = new System.Drawing.Size(134, 22);
             this.MS_SelectAll.Text = "Select All";
             this.MS_SelectAll.Click += new System.EventHandler(this.MS_SelectAll_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(131, 6);
+            // 
+            // MS_Import
+            // 
+            this.MS_Import.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MS_Import_File,
+            this.MS_Import_Folder});
+            this.MS_Import.Image = global::DecryptedDesktop.Properties.Resources.import;
+            this.MS_Import.Name = "MS_Import";
+            this.MS_Import.Size = new System.Drawing.Size(134, 22);
+            this.MS_Import.Text = "Import";
+            // 
+            // MS_Import_File
+            // 
+            this.MS_Import_File.Image = global::DecryptedDesktop.Properties.Resources.File;
+            this.MS_Import_File.Name = "MS_Import_File";
+            this.MS_Import_File.Size = new System.Drawing.Size(180, 22);
+            this.MS_Import_File.Text = "File";
+            this.MS_Import_File.Click += new System.EventHandler(this.MS_Import_File_Click);
+            // 
+            // MS_Import_Folder
+            // 
+            this.MS_Import_Folder.Image = global::DecryptedDesktop.Properties.Resources.Folder;
+            this.MS_Import_Folder.Name = "MS_Import_Folder";
+            this.MS_Import_Folder.Size = new System.Drawing.Size(180, 22);
+            this.MS_Import_Folder.Text = "Folder";
+            this.MS_Import_Folder.Click += new System.EventHandler(this.MS_Import_Folder_Click);
+            // 
+            // MS_Export
+            // 
+            this.MS_Export.Image = global::DecryptedDesktop.Properties.Resources.export;
+            this.MS_Export.Name = "MS_Export";
+            this.MS_Export.Size = new System.Drawing.Size(134, 22);
+            this.MS_Export.Text = "Export";
+            this.MS_Export.Click += new System.EventHandler(this.MS_Export_Click);
             // 
             // CurrentDIR
             // 
@@ -375,6 +432,19 @@
             this.CurrentDIR.Size = new System.Drawing.Size(800, 20);
             this.CurrentDIR.TabIndex = 0;
             this.CurrentDIR.TextChanged += new System.EventHandler(this.CurrentDIR_TextChanged);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(131, 6);
+            // 
+            // MS_NewFolder
+            // 
+            this.MS_NewFolder.Image = global::DecryptedDesktop.Properties.Resources.New_Folder;
+            this.MS_NewFolder.Name = "MS_NewFolder";
+            this.MS_NewFolder.Size = new System.Drawing.Size(134, 22);
+            this.MS_NewFolder.Text = "New Folder";
+            this.MS_NewFolder.Click += new System.EventHandler(this.MS_NewFolder_Click);
             // 
             // Main
             // 
@@ -402,7 +472,7 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip MenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem FileMenu;
         private System.Windows.Forms.ToolStripMenuItem Import;
         private System.Windows.Forms.ToolStripMenuItem Export;
         private System.Windows.Forms.ToolStripMenuItem Menu_Edit;
@@ -438,6 +508,13 @@
         private System.Windows.Forms.ToolStripMenuItem MS_Paste;
         private System.Windows.Forms.ToolStripMenuItem MS_Delete;
         private System.Windows.Forms.ToolStripMenuItem MS_SelectAll;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem MS_Import;
+        private System.Windows.Forms.ToolStripMenuItem MS_Export;
+        private System.Windows.Forms.ToolStripMenuItem MS_Import_File;
+        private System.Windows.Forms.ToolStripMenuItem MS_Import_Folder;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem MS_NewFolder;
     }
 }
 
